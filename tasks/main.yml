@@ -1,0 +1,129 @@
+---
+# tasks file for setup_puppet_agent
+
+
+- name:  fix /etc/hosts
+  ansible.builtin.template:
+    src: templates/hosts.j2
+     #dest: /etc/dnf/dnf.conf
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: '0644'
+  when: fix_hosts
+
+- name: copy "{{ debfile }}"
+  ansible.builtin.copy:
+    src: "templates/{{ debfile }}"
+    dest: "/tmp/{{ debfile }}"
+    #remote_src: yes
+  when: ansible_pkg_mgr == "apt"
+
+- name: copy "{{ rpmfile }}"
+  ansible.builtin.copy:
+    src: "templates/{{ rpmfile }}"
+    dest: "/tmp/{{ rpmfile }}"
+    #remote_src: yes
+  when: ansible_pkg_mgr == "dnf"
+
+# apt install
+- name: fix missing
+  command: apt update -y --fix-missing
+  when: ansible_pkg_mgr == "apt"
+
+- name: Install a "{{ debfile }}"·
+  apt:
+    deb: "/tmp/{{ debfile }}"
+  when: ansible_pkg_mgr == "apt"
+
+- name: fix missing
+  command: apt update -y --fix-missing
+
+- name: install "{{ package }}"
+  apt:
+    name: "{{ package }}"
+    update_cache: yes
+  when: ansible_pkg_mgr == "apt"
+
+- name: Install a "{{ rpmfile }}"·
+  yum:
+    name: "/tmp/{{ rpmfile }}"
+    state: present
+  when: ansible_pkg_mgr == "yum"
+
+- name: install "{{ package }}"
+  yum:
+    name: "{{ package }}"
+    state: present
+  when: ansible_pkg_mgr == "yum"
+
+# remove puppet
+- name: Remove puppet  package
+  apt:
+    name: puppet7-release
+    purge: yes
+    state: absent
+  when: apt_purge
+
+- name: Remove puppet7 agent package
+  apt:
+    name: puppet-agent
+    purge: yes
+    state: absent
+  when: apt_purge
+
+- name: remove a "{{ rpmfile }}"
+  yum:
+    name: "/tmp/{{ rpmfile }}"
+    state: absent
+  when: yum_purge
+
+- name: remove "{{ package }}"
+  yum:
+    name: "{{ package }}"
+    state: absent
+  when: when: yum_purge
+
+# setup puppet conf
+ - name:  set puppet conf
+   ansible.builtin.template:
+     src: templates/puppet.conf.j2
+     dest: /etc/puppetlabs/puppet/puppet.conf
+     owner: root
+     group: root
+     mode: '0644'
+   when: (ansible_pkg_mgr == "yum") or (ansible_pkg_mgr == "dnf") or (ansible_pkg_mgr == "apt")
+
+# enable and start service
+- name: Enable "{{ service }}"
+  ansible.builtin.service:
+    name: "{{ service }}"
+    enabled: yes
+
+- name: Enable "{{ service }}"
+  ansible.builtin.service:
+    name: "{{ service }}"
+    state: started
+
+- name: check puppet agent lock exist
+  ansible.builtin.stat:
+    path: /opt/puppetlabs/puppet/cache/state/agent_catalog_run.lock
+  register: puppet_agent_lock
+
+- name: Remove puppet agent lock if exist·
+  ansible.builtin.file:
+    path: /opt/puppetlabs/puppet/cache/state/agent_catalog_run.lock
+    state: absent
+  #when: puppet_agent_lock | bool == true
+  when: puppet_agent_lock | bool == true
+
+- name: Remove puppet agent ssl dir if set to "true" in vars file
+  ansible.builtin.file:
+    path: /etc/puppetlabs/puppet/ssl
+    state: absent
+  when: delete_puppet_ssl_dir
+
+- name: Run puppet agent and fail if anything goes wrong
+  community.general.puppet:
+  when: run_puppet_agent
+
