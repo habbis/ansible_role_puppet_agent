@@ -1,36 +1,70 @@
-name: Molecule
-
-on:
+---
+name: CI
+'on':
+  pull_request:
   push:
     branches:
-      - main
-  pull_request:
-    branches:
-      - main
+      - master
+  schedule:
+    - cron: "0 5 * * 0"
+
+defaults:
+  run:
+    working-directory: 'habbis.setup_puppet_agent'
 
 jobs:
-  molecule:
+
+  lint:
+    name: Lint
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        scenario:
-          - centos-8
-          #- debian-11
-          - fedora-34
-          - oraclelinux-8
-          - ubuntu-20.04
     steps:
-      - name: Checkout
+      - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: "${{ github.repository }}"
-      - name: Ansible Molecule
-        uses: gofrolist/molecule-action@v2.2.5
+          path: 'habbis.setup_puppet_agent'
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
         with:
-          #molecule_options: --debug --base-config molecule/_shared/base.yml
-          molecule_command: test
-          molecule_args: --scenario-name ${{ matrix.scenario }}
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install yamllint
+
+      - name: Lint code.
+        run: |
+          yamllint .
+
+  molecule:
+    name: Molecule
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        distro:
+          - centos8
+          - centos7
+          - ubuntu2004
+          - debian10
+
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+        with:
+          path: 'geerlingguy.apache'
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install ansible molecule[docker] docker
+
+      - name: Run Molecule tests.
+        run: molecule test
         env:
+          PY_COLORS: '1'
           ANSIBLE_FORCE_COLOR: '1'
+          MOLECULE_DISTRO: ${{ matrix.distro }}
+
 
