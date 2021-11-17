@@ -14,15 +14,15 @@
 
 - name: copy "{{ ubuntu_debfile }}"
   ansible.builtin.copy:
-    src: "templates/{{ debfile }}"
-    dest: "/tmp/{{ debfile }}"
+    src: "templates/{{ ubuntu_debfile }}"
+    dest: "/tmp/{{ ubuntu_debfile }}"
     #remote_src: yes
   when: ansible_os_family == "Ubuntu"
 
 - name: copy "{{ debian_debfile }}"
   ansible.builtin.copy:
-    src: "templates/{{ debfile }}"
-    dest: "/tmp/{{ debfile }}"
+    src: "templates/{{ debian_debfile }}"
+    dest: "/tmp/{{ debian_debfile }}"
     #remote_src: yes
   when: ansible_os_family == "Ubuntu"
 
@@ -40,12 +40,12 @@
 
 - name: Install a "{{ ubuntu_debfile }}"·
   apt:
-    deb: "/tmp/{{ debfile }}"
+    deb: "/tmp/{{ ubuntu_debfile }}"
   when: ansible_os_family == "ubuntu"
 
 - name: Install a "{{ debian_debfile }}"
   apt:
-    deb: "/tmp/{{ debfile }}"
+    deb: "/tmp/{{ debian_debfile }}"
   when: ansible_os_family == "Debian"
 
 - name: fix missing
@@ -94,17 +94,17 @@
   yum:
     name: "{{ package }}"
     state: absent
-  when: when: yum_purge
+  when: yum_purge
 
 # setup puppet conf
- - name:  set puppet conf
-   ansible.builtin.template:
-     src: templates/puppet.conf.j2
-     dest: /etc/puppetlabs/puppet/puppet.conf
-     owner: root
-     group: root
-     mode: '0644'
-   when: (ansible_pkg_mgr == "yum") or (ansible_pkg_mgr == "dnf") or (ansible_pkg_mgr == "apt")
+- name:  set puppet conf
+  ansible.builtin.template:
+    src: templates/puppet.conf.j2
+    dest: /etc/puppetlabs/puppet/puppet.conf
+    owner: root
+    group: root
+    mode: '0644'
+  when: (ansible_pkg_mgr == "yum") or (ansible_pkg_mgr == "dnf") or (ansible_pkg_mgr == "apt")
 
 # enable and start service
 - name: Enable "{{ service }}"
