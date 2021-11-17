@@ -1,38 +1,55 @@
-Role Name
+setup puppet agent 
 =========
 
-A brief description of the role goes here.
+This role setup puppet agent for a puppet server but in my case i use it for foreman server.
 
-Requirements
-------------
-
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
 
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+Here is a list for variables.
 
-Dependencies
-------------
+puppet server name should be placed here.
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
+puppet_server
 
-Example Playbook
-----------------
+ubuntu puppet deb package 
 
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
+ubuntu_debfile
 
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
+debian puppet deb package
 
-License
--------
+debian_debfile
 
-BSD
+rhel rpm package
 
-Author Information
-------------------
+rpmfile
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+the package to install 
+
+package
+
+the service to enable and start
+
+service
+
+If true delete puppet ssl dir if having ssl issues
+
+delete_puppet_ssl_dir: false
+
+If set to true will remove puppet-agent and remove package
+
+apt_purge: false
+
+same as apt purge 
+
+yum_purge: false
+
+if true will  trigger a puppet run
+
+run_puppet_agent: false
+
+if true will fix  /etc/hosts 
+
+fix_hosts: false
+

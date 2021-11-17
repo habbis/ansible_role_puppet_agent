@@ -12,12 +12,19 @@
     mode: '0644'
   when: fix_hosts
 
-- name: copy "{{ debfile }}"
+- name: copy "{{ ubuntu_debfile }}"
   ansible.builtin.copy:
     src: "templates/{{ debfile }}"
     dest: "/tmp/{{ debfile }}"
     #remote_src: yes
-  when: ansible_pkg_mgr == "apt"
+  when: ansible_os_family == "Ubuntu"
+
+- name: copy "{{ debian_debfile }}"
+  ansible.builtin.copy:
+    src: "templates/{{ debfile }}"
+    dest: "/tmp/{{ debfile }}"
+    #remote_src: yes
+  when: ansible_os_family == "Ubuntu"
 
 - name: copy "{{ rpmfile }}"
   ansible.builtin.copy:
@@ -26,15 +33,20 @@
     #remote_src: yes
   when: ansible_pkg_mgr == "dnf"
 
-# apt install
+# ubuntu apt install
 - name: fix missing
   command: apt update -y --fix-missing
   when: ansible_pkg_mgr == "apt"
 
-- name: Install a "{{ debfile }}"·
+- name: Install a "{{ ubuntu_debfile }}"·
   apt:
     deb: "/tmp/{{ debfile }}"
-  when: ansible_pkg_mgr == "apt"
+  when: ansible_os_family == "ubuntu"
+
+- name: Install a "{{ debian_debfile }}"
+  apt:
+    deb: "/tmp/{{ debfile }}"
+  when: ansible_os_family == "Debian"
 
 - name: fix missing
   command: apt update -y --fix-missing

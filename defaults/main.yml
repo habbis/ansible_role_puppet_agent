@@ -3,7 +3,9 @@
 
 puppet_server: hf-foreman04.no.habbfarm.net
 
-debfile: puppet6-release-focal.deb
+ubuntu_debfile: puppet6-release-focal.deb
+
+debian_debfile: puppet6-release-bullseye.deb 
 
 rpmfile: puppet6-release-el-8.noarch.rpm
 
