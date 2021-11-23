@@ -10,6 +10,13 @@
     yum_purge: false
     run_puppet_agent: false
     fix_hosts: false
+    offline_rpmfile: false
+    offline_ubuntu_debfile: false
+    offline_debain_debfile: false
+    online_rpmfile: false
+    online_ubuntu_debfile: false
+    online_debian_debfile: false
+
 
   roles:
     - role: habbis.setup_puppet_agent

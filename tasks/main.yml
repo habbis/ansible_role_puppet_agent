@@ -48,7 +48,6 @@
     #mode: '0440'
   when: online_ubuntu_debfile
 
-
 - name: Download foo.conf
   get_url:
     url: "https://apt.puppetlabs.com/{{ debfile_debfile }}"
@@ -72,7 +71,8 @@
   when: ansible_os_family == "Debian"
 
 - name: fix missing
-  command: apt update -y --fix-missing
+  command: apt update -y --fix-missing 
+  when:  ansible_pkg_mgr == "apt"
 
 - name: install "{{ package }}"
   apt:
