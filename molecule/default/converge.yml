@@ -1,7 +1,16 @@
 ---
 - name: Converge
   hosts: all
-  tasks:
-    - name: "Include setup_puppet_agent"
-      include_role:
-        name: "setup_puppet_agent"
+  become: true
+  
+  vars:
+    delete_puppet_ssl_dir: false
+    apt_purge: false
+    yum_purge: false
+    run_puppet_agent: false
+    fix_hosts: false
+  
+  
+  roles:
+    - role: habbis.setup_puppet_agent
+      
