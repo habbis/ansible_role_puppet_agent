@@ -1,6 +1,6 @@
 ---
 # tasks file for setup_puppet_agent
-- name:  fix /etc/hosts
+- name: fix /etc/hosts
   ansible.builtin.template:
     src: templates/hosts.j2
      #dest: /etc/dnf/dnf.conf
@@ -95,14 +95,14 @@
   when: yum_purge
 
 # setup puppet conf
-- name:  set puppet conf
+- name: set puppet conf
   ansible.builtin.template:
     src: templates/puppet.conf.j2
     dest: /etc/puppetlabs/puppet/puppet.conf
     owner: root
     group: root
     mode: '0644'
-  when: (ansible_pkg_mgr == "yum") or (ansible_pkg_mgr == "dnf") or (ansible_pkg_mgr == "apt")
+  when: (ansible_pkg_mgr == "dnf") or (ansible_pkg_mgr == "apt")
 
 # enable and start service
 - name: Enable "{{ service }}"
