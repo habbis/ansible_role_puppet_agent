@@ -2,23 +2,30 @@
 - name: Converge
   hosts: all
   become: true
-  #gather_facts: yes
-  vars_files:
-    - ../../defaults/main.yml
+  gather_facts: yes
+  #vars_files:
+  #  - ../../defaults/main.yml
     #- molecule/default/defaults/main.yml
+  vars:
+    delete_puppet_ssl_dir: false
+    apt_purge: false
+    yum_purge: false
+    run_puppet_agent: false
+    fix_hosts: false
+    offline_rpmfile: false
+    offline_ubuntu_debfile: false
+    offline_debain_debfile: false
+    online_rpmfile: true
+    online_ubuntu_debfile: true
+    online_debian_debfile: true
 
-  #vars:
-  #  delete_puppet_ssl_dir: false
-  #  apt_purge: false
-  #  yum_purge: false
-  #  run_puppet_agent: false
-  #  fix_hosts: false
-  #  offline_rpmfile: false
-  #  offline_ubuntu_debfile: false
-  #  offline_debain_debfile: false
-  #  online_rpmfile: true
-  #  online_ubuntu_debfile: true
-  #  online_debian_debfile: true
+  tasks:
+    - name: "Include setup_puppet_agent"
+      include_role:
+        name: "setup_puppet_agent"
 
-  roles:
-    - role: habbis.setup_puppet_agent
+
+
+  #roles:
+    #- role: habbis.setup_puppet_agent
+    #- role: setup_puppet_agent

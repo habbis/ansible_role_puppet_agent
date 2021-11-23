@@ -3,7 +3,6 @@
 - name: fix /etc/hosts
   ansible.builtin.template:
     src: templates/hosts.j2
-     #dest: /etc/dnf/dnf.conf
     dest: /etc/hosts
     owner: root
     group: root
@@ -38,23 +37,18 @@
   get_url:
     url: "https://yum.puppet.com/{{ rpmfile }}"
     dest: "/tmp/{{ rpmfile }}"
-    #mode: '0440'
-  #when: (online_rpmfile and ansible_pkg_mgr == "yum")
-  #when: (online_rpmfile and ansible_os_family == "Redhat")
-  when: (online_rpmfile and ansible_os_family == "Centos")
+  when: (online_rpmfile and ansible_pkg_mgr == "yum")
 
 - name: Download "{{ ubuntu_debfile }}"
   get_url:
     url: "https://apt.puppetlabs.com/{{ ubuntu_debfile }}"
     dest: "/tmp/{{ ubuntu_debfile }}"
-    #mode: '0440'
   when: (online_ubuntu_debfile and ansible_os_family == "Ubuntu")
 
 - name: Download "{{ debian_debfile }}"
   get_url:
     url: "https://apt.puppetlabs.com/{{ debian_debfile }}"
     dest: "/tmp/{{ debian_debfile }}"
-    #mode: '0440'
   when: (online_debian_debfile and ansible_os_family == "Debian")
 
 # ubuntu apt install
