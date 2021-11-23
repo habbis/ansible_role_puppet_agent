@@ -41,7 +41,8 @@ jobs:
     strategy:
       matrix:
         distro:
-          - centos8
+          #- centos8
+          - oraclelinux8
           - ubuntu2004
           - debian11
 
