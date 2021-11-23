@@ -15,21 +15,46 @@
     src: "templates/{{ ubuntu_debfile }}"
     dest: "/tmp/{{ ubuntu_debfile }}"
     #remote_src: yes
-  when: ansible_os_family == "Ubuntu"
+  #when: ansible_os_family == "Ubuntu"
+  when: offline_ubuntu_debfile
 
 - name: copy "{{ debian_debfile }}"
   ansible.builtin.copy:
     src: "templates/{{ debian_debfile }}"
     dest: "/tmp/{{ debian_debfile }}"
     #remote_src: yes
-  when: ansible_os_family == "Ubuntu"
+  #when: ansible_os_family == "Debian"
+  when: offline_debain_debfile
 
 - name: copy "{{ rpmfile }}"
   ansible.builtin.copy:
     src: "templates/{{ rpmfile }}"
     dest: "/tmp/{{ rpmfile }}"
     #remote_src: yes
-  when: ansible_pkg_mgr == "dnf"
+  #when: ansible_pkg_mgr == "dnf"
+  when: offline_rpmfile
+
+- name: Download "{{ rpmfile }}"
+  get_url:
+    url: "https://yum.puppet.com/{{ rpmfile }}"
+    dest: "/tmp/{{ rmpfile }}"
+    #mode: '0440'
+  when: online_rpmfile
+
+- name: Download "{{ ubuntu_debfile }}"
+  get_url:
+    url: "https://apt.puppetlabs.com/{{ ubuntu_debfile }}"
+    dest: "/tmp/{{ ubuntu_debfile }}"
+    #mode: '0440'
+  when: online_ubuntu_debfile
+
+
+- name: Download foo.conf
+  get_url:
+    url: "https://apt.puppetlabs.com/{{ debfile_debfile }}"
+    dest: "/tmp/{{ debfile_debfile }}"
+    #mode: '0440'
+  when: online_debian_debfile
 
 # ubuntu apt install
 - name: fix missing
