@@ -12,7 +12,7 @@ name: CI
 
 defaults:
   run:
-    working-directory: 'geerlingguy.firewall'
+    working-directory: 'habbis.setup_puppet_agent'
 
 jobs:
 
