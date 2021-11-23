@@ -37,7 +37,7 @@
 - name: Download "{{ rpmfile }}"
   get_url:
     url: "https://yum.puppet.com/{{ rpmfile }}"
-    dest: "/tmp/{{ rmpfile }}"
+    dest: "/tmp/{{ rpmfile }}"
     #mode: '0440'
   when: (online_rpmfile and ansible_pkg_mgr == "yum")
 
