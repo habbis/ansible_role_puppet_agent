@@ -51,10 +51,10 @@
     dest: "/tmp/{{ debian_debfile }}"
   when: (online_debian_debfile and ansible_os_family == "Debian")
 
-# ubuntu apt install
-#- name: fix missing
-#  command: apt update -y --fix-missing
-#  when: ansible_pkg_mgr == "apt"
+ # ubuntu apt install
+- name: fix missing
+  command: apt update -y --fix-missing
+  when: (fix_apt_problem andansible_pkg_mgr == "apt")
 
 - name: Install a "{{ ubuntu_debfile }}"·
   apt:
@@ -68,7 +68,7 @@
 
 - name: fix missing
   command: apt update -y --fix-missing
-  when: ansible_pkg_mgr == "apt"
+  when: (fix_apt_problem andansible_pkg_mgr == "apt")
 
 - name: install "{{ package }}"
   apt:
