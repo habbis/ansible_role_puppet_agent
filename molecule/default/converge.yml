@@ -24,8 +24,6 @@
       include_role:
         name: "setup_puppet_agent"
 
-
-
   #roles:
     #- role: habbis.setup_puppet_agent
     #- role: setup_puppet_agent
