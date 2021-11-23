@@ -3,8 +3,8 @@ dependencies: []
 
 galaxy_info:
   role_name: setup_puppet_agent
-  author: geerlingguy
-  description: Simple iptables firewall for most Unix-like systems.
+  author: habbis
+  description: setu puppet agen on most Unix-like systems.
   company: "nocompany"
   license: "license (BSD, MIT)"
   min_ansible_version: 2.4
