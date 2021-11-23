@@ -40,7 +40,7 @@
     dest: "/tmp/{{ rpmfile }}"
     #mode: '0440'
   #when: (online_rpmfile and ansible_pkg_mgr == "yum")
-  when: (online_rpmfile and ansible_os_family == "Rocky")
+  when: (online_rpmfile and ansible_os_family == "Redhat")
 
 - name: Download "{{ ubuntu_debfile }}"
   get_url:
