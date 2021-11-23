@@ -39,21 +39,21 @@
     url: "https://yum.puppet.com/{{ rpmfile }}"
     dest: "/tmp/{{ rmpfile }}"
     #mode: '0440'
-  when: online_rpmfile
+  when: (online_rpmfile and ansible_pkg_mgr == "dnf")
 
 - name: Download "{{ ubuntu_debfile }}"
   get_url:
     url: "https://apt.puppetlabs.com/{{ ubuntu_debfile }}"
     dest: "/tmp/{{ ubuntu_debfile }}"
     #mode: '0440'
-  when: online_ubuntu_debfile
+  when: (online_ubuntu_debfile and ansible_os_family == "Ubuntu")
 
 - name: Download foo.conf
   get_url:
     url: "https://apt.puppetlabs.com/{{ debfile_debfile }}"
     dest: "/tmp/{{ debfile_debfile }}"
     #mode: '0440'
-  when: online_debian_debfile
+  when: (online_debian_debfile and ansible_os_family == "Debian")
 
 # ubuntu apt install
 - name: fix missing
@@ -63,7 +63,7 @@
 - name: Install a "{{ ubuntu_debfile }}"·
   apt:
     deb: "/tmp/{{ ubuntu_debfile }}"
-  when: ansible_os_family == "ubuntu"
+  when: ansible_os_family == "Ubuntu"
 
 - name: Install a "{{ debian_debfile }}"
   apt:
