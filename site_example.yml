@@ -2,7 +2,6 @@
 - name: setup puppet agent
   gather_facts: yes
   remote_user: root
-  #remote_user: xo
   #remote_user: ansible
   #become: yes
   #become_method: sudo
