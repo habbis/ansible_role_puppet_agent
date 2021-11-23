@@ -12,7 +12,7 @@ name: CI
 
 defaults:
   run:
-    working-directory: 'habbis.setup_puppet_agent'
+    working-directory: 'setup_puppet_agent'
 
 jobs:
 
@@ -23,7 +23,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'habbis.setup_puppet_agent'
+          path: 'setup_puppet_agent'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
@@ -56,7 +56,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'habbis.setup_puppet_agent'
+          path: 'setup_puppet_agent'
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
