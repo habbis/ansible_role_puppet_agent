@@ -48,7 +48,7 @@
     #mode: '0440'
   when: (online_ubuntu_debfile and ansible_os_family == "Ubuntu")
 
-- name: Download foo.conf
+- name: Download "{{ debian_debfile }}"
   get_url:
     url: "https://apt.puppetlabs.com/{{ debian_debfile }}"
     dest: "/tmp/{{ debian_debfile }}"
