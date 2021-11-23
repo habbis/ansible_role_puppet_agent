@@ -1,26 +1,13 @@
 ---
 # defaults file for setup_puppet_agent
-
 puppet_server: hf-foreman04.no.habbfarm.net
 ubuntu_debfile: puppet6-release-focal.deb 
 debian_debfile: puppet6-release-bullseye.deb 
-
 rpmfile: puppet6-release-el-8.noarch.rpm
-
 package: puppet-agent
-
 service: puppet
-
-
 delete_puppet_ssl_dir: false
-
 apt_purge: false
-
 yum_purge: false
-
 run_puppet_agent: false
-
 fix_hosts: false
-
-#adding
-
