@@ -81,20 +81,19 @@ if host have internet access
 online_rpmfile: true
 ```
 
-if host have internet access
+same as rpm based 
 
 ```
 online_ubuntu_debfile: true
 ```
 
-if host have internet access
-
+same as rpm based 
 ```
 online_debian_debfile: true
 ```
 
 on debian based distro if 
-apt problem you can set true
+ having apt missing problem you can true
 
 ```
 fix_apt_missing: false
