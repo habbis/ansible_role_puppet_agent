@@ -54,6 +54,53 @@ if true will fix  /etc/hosts
 fix_hosts: false
 ```
 
+if server have no internet accessa set
+true
+
+```
+offline_rpmfile: false
+```
+
+
+if server have no internet accessa set
+true
+
+```
+offline_ubuntu_debfile: false
+```
+
+if server have no internet accessa set
+true
+
+```
+offline_debain_debfile: false
+```
+
+if host have internet access
+```
+online_rpmfile: true
+```
+
+if host have internet access
+
+```
+online_ubuntu_debfile: true
+```
+
+if host have internet access
+
+```
+online_debian_debfile: true
+```
+
+on debian based distro if 
+apt problem you can set true
+
+```
+fix_apt_missing: false
+```
+
+
 
 Example site.yml
 
