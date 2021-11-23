@@ -8,9 +8,9 @@ name: CI
   schedule:
     - cron: "0 1 * * 1"
 
-defaults:
-  run:
-    working-directory: 'setup_puppet_agent'
+#defaults:
+#  run:
+#    working-directory: 'setup_puppet_agent'
 
 jobs:
 
@@ -21,7 +21,7 @@ jobs:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'setup_puppet_agent'
+          path: "${{ github.repository }}"
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
@@ -41,15 +41,15 @@ jobs:
     strategy:
       matrix:
         distro:
-          - centos8
+          - centos-8
           - ubuntu2004
-          - debian11
+          - debian-11
 
     steps:
       - name: Check out the codebase.
         uses: actions/checkout@v2
         with:
-          path: 'setup_puppet_agent'
+          path: "${{ github.repository }}"
 
       - name: Set up Python 3.
         uses: actions/setup-python@v2
