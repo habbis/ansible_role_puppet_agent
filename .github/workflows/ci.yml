@@ -42,7 +42,7 @@ jobs:
       matrix:
         distro:
           #- centos8
-          - oraclelinux8
+          - oraclelinux-8
           - ubuntu2004
           - debian11
 
