@@ -19,6 +19,6 @@ offline_rpmfile: false
 offline_ubuntu_debfile: false
 offline_debain_debfile: false
 # online install
-online_rpmfile: false
-online_ubuntu_debfile: false
-online_debian_debfile: false
+online_rpmfile: true
+online_ubuntu_debfile: true
+online_debian_debfile: true
