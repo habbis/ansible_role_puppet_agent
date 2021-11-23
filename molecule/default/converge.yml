@@ -4,8 +4,8 @@
   become: true
   #gather_facts: yes
   vars_files:
-    -  ../../defaults/main.yml
-
+    - ../../defaults/main.yml
+    #- molecule/default/defaults/main.yml
 
   #vars:
   #  delete_puppet_ssl_dir: false
@@ -20,7 +20,5 @@
   #  online_ubuntu_debfile: true
   #  online_debian_debfile: true
 
-
   roles:
     - role: habbis.setup_puppet_agent
-    #- role: { ../setup_puppet_agent }
