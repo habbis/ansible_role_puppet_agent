@@ -39,7 +39,7 @@
     url: "https://yum.puppet.com/{{ rpmfile }}"
     dest: "/tmp/{{ rmpfile }}"
     #mode: '0440'
-  when: (online_rpmfile and ansible_pkg_mgr == "dnf")
+  when: (online_rpmfile and ansible_pkg_mgr == "yum")
 
 - name: Download "{{ ubuntu_debfile }}"
   get_url:

@@ -2,7 +2,7 @@
 - name: Converge
   hosts: all
   become: true
-  gather_facts: yes
+  #gather_facts: yes
 
   vars:
     delete_puppet_ssl_dir: false
