@@ -1,6 +1,8 @@
 setup puppet agent 
 =========
 
+[![CI](https://github.com/habbis/ansible_role_puppet_agent/workflows/CI/badge.svg)](https://github.com/habbis/ansible_role_puppet_agent/actions?query=workflow%3ACI)
+
 This role setup puppet agent for a puppet server but in my case i use it for foreman server.
 
 
