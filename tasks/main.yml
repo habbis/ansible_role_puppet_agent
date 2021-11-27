@@ -130,11 +130,13 @@
   ansible.builtin.service:
     name: "{{ service }}"
     enabled: yes
+  ignore_errors: yes
 
 - name: Enable "{{ service }}"
   ansible.builtin.service:
     name: "{{ service }}"
     state: started
+  ignore_errors: yes
 
 - name: check puppet agent lock exist
   ansible.builtin.stat:
