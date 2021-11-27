@@ -1,0 +1,32 @@
+---
+- name: Download "{{ rpmfile }}"
+  get_url:
+    url: "https://yum.puppet.com/{{ rpmfile }}"
+    dest: "/tmp/{{ rpmfile }}"
+  when: (online_rpmfile and ansible_pkg_mgr == "yum"
+
+- name: copy "{{ rpmfile }}"
+  ansible.builtin.copy:
+    src: "templates/{{ rpmfile }}"
+    dest: "/tmp/{{ rpmfile }}"
+    #remote_src: yes
+  #when: ansible_pkg_mgr == "dnf"
+  when: offline_rpmfile
+
+- name: Download "{{ rpmfile }}"
+  get_url:
+    url: "https://yum.puppet.com/{{ rpmfile }}"
+    dest: "/tmp/{{ rpmfile }}"
+  when: (online_rpmfile and ansible_pkg_mgr == "yum")
+
+- name: Install a "{{ rpmfile }}"·
+  yum:
+    name: "/tmp/{{ rpmfile }}"
+    state: present
+  when: ansible_pkg_mgr == "yum"
+
+- name: install "{{ package }}"
+  yum:
+    name: "{{ package }}"
+    state: present
+  when: ansible_pkg_mgr == "yum
