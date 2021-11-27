@@ -21,9 +21,9 @@
 
 
   tasks:
-    - name: "Include setup_puppet_agent"
+    - name: "Include ansible_role_puppet_agent"
       include_role:
-        name: "setup_puppet_agent"
+        name: "ansible_role_puppet_agent"
 
   #roles:
-    #- role: habbis.setup_puppet_agent
+    #- role: habbis.ansible_role_puppet_agent

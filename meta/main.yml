@@ -2,7 +2,7 @@
 dependencies: []
 
 galaxy_info:
-  role_name: setup_puppet_agent
+  role_name: ansible_role_puppet_agent
   author: habbis
   description: setu puppet agen on most Unix-like systems.
   company: "nocompany"

@@ -119,5 +119,5 @@ Example site.yml
     #-  defaults/secrets.yml
 
   roles:
-    - { role: ../setup_puppet_agent }
+    - { role: ../ansible_role_puppet_agent }
 ```

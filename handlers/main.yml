@@ -1,2 +1,2 @@
 ---
-# handlers file for setup_puppet_agent
+# handlers file for ansible_role_puppet_agent

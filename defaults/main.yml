@@ -1,5 +1,5 @@
 ---
-# defaults file for setup_puppet_agent
+# defaults file for ansible_role_puppet_agent
 puppet_server: hf-foreman04.no.habbfarm.net
 # ubuntu 20.04
 ubuntu_debfile: puppet6-release-focal.deb

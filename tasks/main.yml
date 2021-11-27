@@ -1,5 +1,5 @@
 ---
-# tasks file for setup_puppet_agent
+# tasks file for ansible_role_puppet_agent
 - name: fix /etc/hosts
   ansible.builtin.template:
     src: templates/hosts.j2
