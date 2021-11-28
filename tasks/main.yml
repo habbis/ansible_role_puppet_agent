@@ -21,7 +21,7 @@
     owner: root
     group: root
     mode: '0644'
-  when: (ansible_pkg_mgr == "dnf") or (ansible_pkg_mgr == "apt")
+  when: (ansible_pkg_mgr == "dnf" or ansible_pkg_mgr == "apt")
 
 # enable and start service
 - name: Enable "{{ service }}"
