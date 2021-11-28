@@ -3,7 +3,7 @@
   get_url:
     url: "https://yum.puppet.com/{{ rpmfile }}"
     dest: "/tmp/{{ rpmfile }}"
-  when: (online_rpmfile and ansible_pkg_mgr == "yum"
+  when: (online_rpmfile and ansible_pkg_mgr == "yum")
 
 - name: copy "{{ rpmfile }}"
   ansible.builtin.copy:
@@ -29,4 +29,4 @@
   yum:
     name: "{{ package }}"
     state: present
-  when: ansible_pkg_mgr == "yum
+  when: ansible_pkg_mgr == "yum"
