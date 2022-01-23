@@ -3,7 +3,7 @@
   get_url:
     url: "https://yum.puppet.com/{{ rpmfile }}"
     dest: "/tmp/{{ rpmfile }}"
-  when: (online_rpmfile and ansible_pkg_mgr == "yum")
+  when: (online_rpmfile and ansible_pkg_mgr == "yum" and ansible_pkg_mgr == "dnf")
 
 - name: copy "{{ rpmfile }}"
   ansible.builtin.copy:
@@ -17,16 +17,16 @@
   get_url:
     url: "https://yum.puppet.com/{{ rpmfile }}"
     dest: "/tmp/{{ rpmfile }}"
-  when: (online_rpmfile and ansible_pkg_mgr == "yum")
+  when: (online_rpmfile and ansible_pkg_mgr == "yum" and ansible_pkg_mgr == "dnf")
 
 - name: Install a "{{ rpmfile }}"·
   yum:
     name: "/tmp/{{ rpmfile }}"
     state: present
-  when: ansible_pkg_mgr == "yum"
+  when: (ansible_pkg_mgr == "yum" and ansible_pkg_mgr == "dnf")
 
 - name: install "{{ package }}"
   yum:
     name: "{{ package }}"
     state: present
-  when: ansible_pkg_mgr == "yum"
+  when: (ansible_pkg_mgr == "yum" and ansible_pkg_mgr == "dnf")

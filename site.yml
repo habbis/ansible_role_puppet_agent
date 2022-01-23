@@ -5,7 +5,7 @@
   #remote_user: ansible
   #become: yes
   #become_method: sudo
-  hosts: test
+  hosts: puppet-agents
   #hosts: puppet-clients
   #hosts: all
   vars_files:
