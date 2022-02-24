@@ -42,7 +42,7 @@ jobs:
       matrix:
         distro:
           #- centos8
-          #- ubi8
+          - ubi8
           - ubuntu2004
           - debian11
 
