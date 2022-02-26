@@ -43,7 +43,7 @@ jobs:
         distro:
           #- centos8
           #- ubi8
-          - rockylinux8
+          #- rockylinux8
           - ubuntu2004
           - debian11
 
