@@ -3,20 +3,20 @@
   get_url:
     url: "https://apt.puppetlabs.com/{{ ubuntu_debfile }}"
     dest: "/tmp/{{ ubuntu_debfile }}"
-  when: (online_ubuntu_debfile and ansible_os_family == "Ubuntu")
+  when: (online_ubuntu_debfile and ansible_distribution == "Ubuntu")
 
 - name: Download "{{ debian_debfile }}"
   get_url:
     url: "https://apt.puppetlabs.com/{{ debian_debfile }}"
     dest: "/tmp/{{ debian_debfile }}"
-  when: (online_debian_debfile and ansible_os_family == "Debian")
+  when: (online_debian_debfile and ansible_distribution == "Debian")
 
 - name: copy "{{ ubuntu_debfile }}"
   ansible.builtin.copy:
     src: "templates/{{ ubuntu_debfile }}"
     dest: "/tmp/{{ ubuntu_debfile }}"
     #remote_src: yes
-  #when: ansible_os_family == "Ubuntu"
+  #when: ansible_distribution == "Ubuntu"
   when: offline_ubuntu_debfile
 
 - name: copy "{{ debian_debfile }}"
@@ -24,20 +24,20 @@
     src: "templates/{{ debian_debfile }}"
     dest: "/tmp/{{ debian_debfile }}"
     #remote_src: yes
-  #when: ansible_os_family == "Debian"
+  #when: ansible_distribution == "Debian"
   when: offline_debain_debfile
 
 - name: Download "{{ ubuntu_debfile }}"
   get_url:
     url: "https://apt.puppetlabs.com/{{ ubuntu_debfile }}"
     dest: "/tmp/{{ ubuntu_debfile }}"
-  when: (online_ubuntu_debfile and ansible_os_family == "Ubuntu")
+  when: (online_ubuntu_debfile and ansible_distribution == "Ubuntu")
 
 - name: Download "{{ debian_debfile }}"
   get_url:
     url: "https://apt.puppetlabs.com/{{ debian_debfile }}"
     dest: "/tmp/{{ debian_debfile }}"
-  when: (online_debian_debfile and ansible_os_family == "Debian")
+  when: (online_debian_debfile and ansible_distribution == "Debian")
 
  # ubuntu apt install
 - name: fix missing
@@ -47,12 +47,12 @@
 - name: Install a "{{ ubuntu_debfile }}"·
   apt:
     deb: "/tmp/{{ ubuntu_debfile }}"
-  when: ansible_os_family == "Ubuntu"
+  when: ansible_distribution == "Ubuntu"
 
 - name: Install a "{{ debian_debfile }}"
   apt:
     deb: "/tmp/{{ debian_debfile }}"
-  when: ansible_os_family == "Debian"
+  when: ansible_distribution == "Debian"
 
 - name: fix missing
   command: apt update -y --fix-missing
