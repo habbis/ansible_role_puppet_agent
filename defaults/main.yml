@@ -10,7 +10,8 @@ ubuntu_debfile: puppet7-release-focal.deb
 debian_debfile: puppet7-release-bullseye.deb
 # rhel 8
 #rpmfile: puppet6-release-el-8.noarch.rpm
-rpmfile: puppet7-release-el-8.noarch.rpm
+rpmfile_release8: puppet7-release-el-8.noarch.rpm
+rpmfile_release9: puppet7-release-el-9.noarch.rpm
 package: puppet-agent
 service: puppet
 delete_puppet_ssl_dir: false
